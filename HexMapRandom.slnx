@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="HexMapRandom.Tests/HexMapRandom.Tests.csproj" Id="6400d8f8-b359-4884-a85b-230fc651c80f" />
   <Project Path="HexMapRandom/HexMapRandom.csproj" />
 </Solution>

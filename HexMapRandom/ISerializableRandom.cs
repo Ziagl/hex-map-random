@@ -51,5 +51,5 @@ public interface ISerializableRandom
     /// Writes the current state of the random generator to a stream in binary format.
     /// </summary>
     /// <param name="stream">The stream to write the binary data to.</param>
-    void WriteTo(Stream stream);
+    void Write(Stream stream);
 }

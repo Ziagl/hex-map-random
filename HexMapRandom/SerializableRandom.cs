@@ -106,20 +106,26 @@ public class SerializableRandom : ISerializableRandom
     public static SerializableRandom FromJson(string json)
     {
         if (json == null)
+        {
             throw new ArgumentNullException(nameof(json));
+        }
 
         var state = JsonSerializer.Deserialize<RandomState>(json);
         if (state == null)
+        {
             throw new JsonException("Failed to deserialize random state from JSON.");
+        }
 
         return new SerializableRandom(state.Seed, state.CallCount);
     }
 
     /// <inheritdoc/>
-    public void WriteTo(Stream stream)
+    public void Write(Stream stream)
     {
         if (stream == null)
+        {
             throw new ArgumentNullException(nameof(stream));
+        }
 
         using var writer = new BinaryWriter(stream, System.Text.Encoding.UTF8, leaveOpen: true);
         writer.Write(_seed);
@@ -133,10 +139,12 @@ public class SerializableRandom : ISerializableRandom
     /// <returns>A new SerializableRandom instance with the restored state.</returns>
     /// <exception cref="ArgumentNullException">Thrown when stream is null.</exception>
     /// <exception cref="EndOfStreamException">Thrown when the stream does not contain valid binary data.</exception>
-    public static SerializableRandom ReadFrom(Stream stream)
+    public static SerializableRandom Read(Stream stream)
     {
         if (stream == null)
+        {
             throw new ArgumentNullException(nameof(stream));
+        }
 
         using var reader = new BinaryReader(stream, System.Text.Encoding.UTF8, leaveOpen: true);
         int seed = reader.ReadInt32();
